@@ -1,5 +1,22 @@
 {
-  "files": ["./declarations.d.ts"],
+  "compilerOptions": {
+    "target": "ES2020",                           // Cible ES2020 pour des fonctionnalités modernes
+    "module": "ESNext",                           // Utilisation de modules ESNext
+    "lib": ["ES2020", "DOM"],                     // Inclut ES2020 et les API DOM
+    "strict": true,                               // Active le mode strict
+    "jsx": "react-jsx",                           // Prise en charge de JSX pour React 17+
+    "esModuleInterop": true,                      // Compatibilité avec CommonJS et ESModules
+    "skipLibCheck": true,                         // Ignore la vérification des types dans node_modules
+    "forceConsistentCasingInFileNames": true,     // Respecte la casse dans les noms de fichiers
+    "noImplicitAny": true,                        // Interdit les types implicites 'any'
+    "moduleResolution": "node",                   // Résolution des modules en mode Node.js
+    "resolveJsonModule": true,                    // Permet d'importer des fichiers JSON
+    "allowSyntheticDefaultImports": true,         // Autorise les imports par défaut pour les modules CommonJS
+    "isolatedModules": true,                      // Active l'isolation des modules pour la compatibilité avec Babel
+    "strictNullChecks": true                      // Vérifie les valeurs null et undefined
+  },
+  "include": ["src/**/*", "declarations.d.ts"],   // Inclut les fichiers dans le dossier 'src'
+  "exclude": ["node_modules", "dist"],           // Exclut node_modules et dist
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
