@@ -3,20 +3,20 @@ export const schema = {
   properties: {
     firstName: { type: "string", title: "Nom" },
     lastName: { type: "string", title: "Prénom" },
-    age: { type: "integer", title: "Âge", minimum: 1 },
+    age: { type: "integer", title: "Age", minimum: 1 },
     country: { type: "string", title: "Pays" },
     address: { type: "string", title: "Adresse" },
     email: {
       type: "string",
       title: "Email",
-      format: "email"
+      format: "email",
     },
     phoneNumber: {
       type: "string",
       title: "Numéro de téléphone",
-      pattern: "^[0-9]{10}$" 
-    }
-  }
+      pattern: "^[0-9]{10}$",
+    },
+  },
 };
 
 export const uiSchema = {
@@ -28,26 +28,26 @@ export const uiSchema = {
       elements: [
         { type: "Control", scope: "#/properties/firstName" },
         { type: "Control", scope: "#/properties/lastName" },
-        { type: "Control", scope: "#/properties/age" }
-      ]
+        { type: "Control", scope: "#/properties/age" },
+      ],
     },
     {
       type: "Category",
       label: "Localisation",
       elements: [
         { type: "Control", scope: "#/properties/country" },
-        { type: "Control", scope: "#/properties/address" }
-      ]
+        { type: "Control", scope: "#/properties/address" },
+      ],
     },
     {
       type: "Category",
       label: "Contact",
       elements: [
         { type: "Control", scope: "#/properties/email" },
-        { type: "Control", scope: "#/properties/phoneNumber" }
-      ]
-    }
-  ]
+        { type: "Control", scope: "#/properties/phoneNumber" },
+      ],
+    },
+  ],
 };
 
 export const data = {
@@ -57,5 +57,5 @@ export const data = {
   country: "",
   address: "",
   email: "",
-  phoneNumber: ""
+  phoneNumber: "",
 };
