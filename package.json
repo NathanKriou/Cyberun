@@ -13,13 +13,13 @@
     "@jsonforms/core": "^3.4.1",
     "@jsonforms/material-renderers": "^3.4.1",
     "@jsonforms/react": "^3.4.1",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
     "antd": "^5.22.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "@vitejs/plugin-react": "^2.2.0",
