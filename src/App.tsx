@@ -5,7 +5,7 @@ import { schema2, uiSchema2, data2 as initialData2 } from "./schema2";
 import CategorizationRenderer from "./components/CategorizationRenderer";
 import "./App.css";
 
-const { Header, Content } = Layout; // Correct destructuring of Layout
+const { Header, Content } = Layout;
 
 const App: React.FC = () => {
   const [visible, setVisible] = useState(false);
