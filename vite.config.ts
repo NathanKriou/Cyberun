@@ -5,8 +5,10 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   esbuild: {
-    loader: "jsx", // Activer JSX dans les fichiers .js
-    include: /\.[jt]sx?$/, // Inclure les fichiers .js et .jsx
+    loader: {
+      ".js": "jsx", // Traite les fichiers .js contenant du JSX comme des fichiers JSX
+    },
+    include: /\.[jt]sx?$/, // Inclut les fichiers .ts, .tsx, .js, et .jsx
   },
   css: {
     preprocessorOptions: {
