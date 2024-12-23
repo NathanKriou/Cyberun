@@ -5,24 +5,7 @@ import { schema2, uiSchema2, data2 as initialData2 } from "./schema2";
 import CategorizationRenderer from "./components/CategorizationRenderer";
 import "./App.css";
 
-// Types pour "Categorization" et "Category"
-type Categorization = {
-  type: "Categorization";
-  label: string;
-  elements: {
-    type: string;
-    label: string;
-    elements: { type: string; scope: string }[];
-  }[];
-};
-
-type Category = {
-  type: "Category";
-  label: string;
-  elements: { type: string; scope: string }[];
-};
-
-const { Header, Content } = Layout;
+const { Header, Content } = Layout; // Correct destructuring of Layout
 
 const App: React.FC = () => {
   const [visible, setVisible] = useState(false);
@@ -105,13 +88,13 @@ const App: React.FC = () => {
       );
     }
 
-    let selectedUiSchema: Categorization | Category;
+    let selectedUiSchema;
     let selectedData;
     let selectedSchema;
 
     if (["Identité", "Localisation", "Contact"].includes(selectedCategory)) {
       selectedUiSchema = {
-        type: "Categorization", // "Categorization" ici
+        type: "Categorization",
         label: selectedCategory,
         elements: uiSchema.elements.filter(
           (element) => element.label === selectedCategory
@@ -121,7 +104,7 @@ const App: React.FC = () => {
       selectedSchema = schema;
     } else {
       selectedUiSchema = {
-        type: "Category", // "Category" ici
+        type: "Categorization",
         label: selectedCategory,
         elements: uiSchema2.elements.filter(
           (element) => element.label === selectedCategory
@@ -135,7 +118,7 @@ const App: React.FC = () => {
       <div className="form-container">
         <CategorizationRenderer
           schema={selectedSchema}
-          uiSchema={selectedUiSchema} // Passez le bon type ici
+          uiSchema={selectedUiSchema as any}
           data={selectedData}
           onChange={handleChange}
         />
