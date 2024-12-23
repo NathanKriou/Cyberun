@@ -14,7 +14,9 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "strictNullChecks": true,
-    "types": ["vite/client", "@vitejs/plugin-react", "react"]
+    "types": ["vite/client", "@vitejs/plugin-react", "react"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   },
   "include": ["src/**/*", "declarations.d.ts"],
   "exclude": ["node_modules", "dist"]
