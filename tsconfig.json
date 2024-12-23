@@ -13,7 +13,9 @@
     "resolveJsonModule": true,                    // Permet d'importer des fichiers JSON
     "allowSyntheticDefaultImports": true,         // Autorise les imports par défaut pour les modules CommonJS
     "isolatedModules": true,                      // Active l'isolation des modules pour la compatibilité avec Babel
-    "strictNullChecks": true                      // Vérifie les valeurs null et undefined
+    "strictNullChecks": true,                     // Vérifie les valeurs null et undefined
+    "types": ["react", "react-dom"],              // Ajouter les types React
+    "allowImportingTsExtensions": true            // Permet d'importer des fichiers avec extensions .ts/.tsx
   },
   "include": ["src/**/*", "declarations.d.ts"],   // Inclut les fichiers dans le dossier 'src'
   "exclude": ["node_modules", "dist"],           // Exclut node_modules et dist
