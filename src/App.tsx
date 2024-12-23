@@ -5,6 +5,23 @@ import { schema2, uiSchema2, data2 as initialData2 } from "./schema2";
 import CategorizationRenderer from "./components/CategorizationRenderer";
 import "./App.css";
 
+// Types pour "Categorization" et "Category"
+type Categorization = {
+  type: "Categorization";
+  label: string;
+  elements: {
+    type: string;
+    label: string;
+    elements: { type: string; scope: string }[];
+  }[];
+};
+
+type Category = {
+  type: "Category";
+  label: string;
+  elements: { type: string; scope: string }[];
+};
+
 const { Header, Content } = Layout;
 
 const App: React.FC = () => {
@@ -22,7 +39,10 @@ const App: React.FC = () => {
   };
 
   const handleChange = ({ data }: { data: any }) => {
-    if (selectedCategory && ["Identité", "Localisation", "Contact"].includes(selectedCategory)) {
+    if (
+      selectedCategory &&
+      ["Identité", "Localisation", "Contact"].includes(selectedCategory)
+    ) {
       setData(data);
     } else {
       setData2(data);
@@ -32,18 +52,27 @@ const App: React.FC = () => {
   const validateForm = (formData: any, formSchema: any) => {
     for (const key in formSchema.properties) {
       if (!formData[key]) {
-        message.error(`Le champ ${formSchema.properties[key].title} est requis`);
+        message.error(
+          `Le champ ${formSchema.properties[key].title} est requis`
+        );
         return false;
       }
       if (formSchema.properties[key].pattern) {
         const regex = new RegExp(formSchema.properties[key].pattern);
         if (!regex.test(formData[key])) {
-          message.error(`Le champ ${formSchema.properties[key].title} n'est pas au bon format`);
+          message.error(
+            `Le champ ${formSchema.properties[key].title} n'est pas au bon format`
+          );
           return false;
         }
       }
-      if (formSchema.properties[key].format === "email" && !/\S+@\S+\.\S+/.test(formData[key])) {
-        message.error(`Le champ ${formSchema.properties[key].title} n'est pas au bon format`);
+      if (
+        formSchema.properties[key].format === "email" &&
+        !/\S+@\S+\.\S+/.test(formData[key])
+      ) {
+        message.error(
+          `Le champ ${formSchema.properties[key].title} n'est pas au bon format`
+        );
         return false;
       }
     }
@@ -51,7 +80,10 @@ const App: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    if (selectedCategory && ["Identité", "Localisation", "Contact"].includes(selectedCategory)) {
+    if (
+      selectedCategory &&
+      ["Identité", "Localisation", "Contact"].includes(selectedCategory)
+    ) {
       if (validateForm(data, schema)) {
         console.log("Formulaire soumis :", data);
         message.success("Formulaire soumis avec succès !");
@@ -66,26 +98,34 @@ const App: React.FC = () => {
 
   const renderForm = () => {
     if (!selectedCategory) {
-      return <div>Veuillez sélectionner une catégorie dans l'onglet 'Mon compte'</div>;
+      return (
+        <div>
+          Veuillez sélectionner une catégorie dans l'onglet 'Mon compte'
+        </div>
+      );
     }
 
-    let selectedUiSchema;
+    let selectedUiSchema: Categorization | Category;
     let selectedData;
     let selectedSchema;
 
     if (["Identité", "Localisation", "Contact"].includes(selectedCategory)) {
       selectedUiSchema = {
-        type: "Categorization",
+        type: "Categorization", // "Categorization" ici
         label: selectedCategory,
-        elements: uiSchema.elements.filter((element) => element.label === selectedCategory)
+        elements: uiSchema.elements.filter(
+          (element) => element.label === selectedCategory
+        ),
       };
       selectedData = data;
       selectedSchema = schema;
     } else {
       selectedUiSchema = {
-        type: "Categorization",
+        type: "Category", // "Category" ici
         label: selectedCategory,
-        elements: uiSchema2.elements.filter((element) => element.label === selectedCategory)
+        elements: uiSchema2.elements.filter(
+          (element) => element.label === selectedCategory
+        ),
       };
       selectedData = data2;
       selectedSchema = schema2;
@@ -95,7 +135,7 @@ const App: React.FC = () => {
       <div className="form-container">
         <CategorizationRenderer
           schema={selectedSchema}
-          uiSchema={selectedUiSchema as any}
+          uiSchema={selectedUiSchema} // Passez le bon type ici
           data={selectedData}
           onChange={handleChange}
         />
@@ -113,9 +153,7 @@ const App: React.FC = () => {
       </Button>
       <Layout className="main-layout" style={{ marginLeft: 200 }}>
         <Header className="main-header" />
-        <Content className="main-content">
-          {renderForm()}
-        </Content>
+        <Content className="main-content">{renderForm()}</Content>
       </Layout>
       <Drawer
         title="Sélectionnez une catégorie"
@@ -127,7 +165,7 @@ const App: React.FC = () => {
         <Menu
           mode="inline"
           onClick={({ key }) => handleCategoryClick(key)}
-          defaultOpenKeys={['set1', 'set2']}
+          defaultOpenKeys={["set1", "set2"]}
         >
           <Menu.SubMenu key="set1" title="Informations">
             <Menu.Item key="Identité">Identité</Menu.Item>
